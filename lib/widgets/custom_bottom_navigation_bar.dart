@@ -1,53 +1,53 @@
 import 'package:flutter/material.dart';
-import 'package:practise_api_news_app/widgets/custom_nav_bar_items.dart';
 
-class CustomBottomNavigationBar extends StatelessWidget {
+class CustomBottomNavigationBar extends StatefulWidget {
   const CustomBottomNavigationBar({super.key});
+
+  @override
+  State<CustomBottomNavigationBar> createState() =>
+      _CustomBottomNavigationBarState();
+}
+
+class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
+ int currentIcon = 0;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 40, right: 30, left: 30),
       child: Container(
-        height: 70,
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(32),
-          boxShadow: const [
-            BoxShadow(
-              color: Colors.black12,
-              blurRadius: 10,
-              offset: Offset(0, 4),
-            ),
-          ],
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            CustomNavBarItems(
-                icon: Icons.home,
-                iconName: 'Home',
-                onTap: () {
-                  print('Home Selected');
+          height: 70,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(32),
+            boxShadow: const [
+              BoxShadow(
+                color: Colors.black12,
+                blurRadius: 10,
+                offset: Offset(0, 4),
+              ),
+            ],
+          ),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(32),
+            child: BottomNavigationBar(
+                selectedItemColor: Colors.redAccent,
+                unselectedItemColor: Colors.grey,
+                currentIndex: currentIcon,
+                onTap: (index) {
+                  setState(() {
+                    currentIcon = index;
+                  });
                 },
-                isSelected: true),
-            CustomNavBarItems(
-                icon: Icons.favorite,
-                iconName: 'Favorite',
-                onTap: () {
-                  print('Favorite Selected');
-                },
-                isSelected: false),
-            CustomNavBarItems(
-                icon: Icons.person,
-                iconName: 'Profile',
-                onTap: () {
-                  print('Profile Selected');
-                },
-                isSelected: false),
-          ],
-        ),
-      ),
+                items: const [
+                  BottomNavigationBarItem(
+                      icon: Icon(Icons.home), label: 'Home'),
+                  BottomNavigationBarItem(
+                      icon: Icon(Icons.favorite), label: 'Favorite'),
+                  BottomNavigationBarItem(
+                      icon: Icon(Icons.person), label: 'Profile'),
+                ]),
+          )),
     );
   }
 }

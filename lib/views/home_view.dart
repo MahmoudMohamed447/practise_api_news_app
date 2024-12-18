@@ -16,6 +16,7 @@ class _HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBody: true,
         appBar: AppBar(
           elevation: 0,
           title: const CustomAppBar(),
